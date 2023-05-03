@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
     List<Item> items = new ArrayList<>();
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = textName.getText().toString();
                 String phone = textPhone.getText().toString();
-                if (name != null && phone != null){
-                items.add(new Item(name, phone, R.drawable.icon));
-                }
+                    items.add(new Item(name, phone, R.drawable.icon));
             }
         });
 
@@ -55,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btn_next_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent.putParcelableArrayListExtra("item",(ArrayList) items);
+                intent.putParcelableArrayListExtra("item", (ArrayList) items);
                 startActivity(intent);
 
             }

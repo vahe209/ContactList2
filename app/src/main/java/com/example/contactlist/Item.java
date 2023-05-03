@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-public class Item implements Parcelable{
+public class Item  implements Parcelable{
     private String name;
     private String phone;
     private int image;

@@ -9,23 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsViewHolder> {
     Context context;
     List<Item> items;
 
 
-    public MyAdapter(Context context, ArrayList<Item> items) {
+    public ContactsAdapter(Context context, ArrayList<Item> items) {
         this.context = context;
         this.items = items;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item, parent, false));
+    public ContactsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ContactsViewHolder(LayoutInflater.from(context).inflate(R.layout.item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(ContactsViewHolder holder, int position) {
         holder.nameView.setText((items.get(position).getName()));
         holder.phoneView.setText(items.get(position).getPhone());
         holder.imageView.setImageResource(items.get(position).getImage());

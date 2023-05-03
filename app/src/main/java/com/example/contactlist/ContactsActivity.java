@@ -1,16 +1,28 @@
 package com.example.contactlist;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.datastore.core.DataStore;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.preference.PreferenceDataStore;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.prefs.Preferences;
+
+import kotlin.coroutines.Continuation;
+import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.flow.Flow;
 
 public class ContactsActivity extends AppCompatActivity {
     RecyclerView rv;
@@ -19,8 +31,7 @@ public class ContactsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
+        loadData();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
@@ -32,13 +43,33 @@ public class ContactsActivity extends AppCompatActivity {
         btnPrev.setOnClickListener(v -> goBack());
         RecyclerView recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(ContactsActivity.this));
-        recyclerView.setAdapter(new MyAdapter(getApplicationContext(), itemArrayList));
-
+        recyclerView.setAdapter(new ContactsAdapter(getApplicationContext(), itemArrayList));
     }
 
+
     public void goBack() {
-       onBackPressed();
-     //   Intent intent = new Intent(ContactsActivity.this, MainActivity.class);
-      //  startActivity(intent);
+        saveData();
+        onBackPressed();
+    }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(itemArrayList);
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<Item>>() {
+        }.getType();
+        itemArrayList = gson.fromJson(json, type);
+        if (itemArrayList == null) {
+            itemArrayList = new ArrayList<>();
+        }
     }
 }
