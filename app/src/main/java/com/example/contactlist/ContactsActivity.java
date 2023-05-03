@@ -13,8 +13,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ContactsActivity extends AppCompatActivity {
-    RecyclerView rv;
-    ArrayList<Item> itemArrayList = new ArrayList<>();
+   private RecyclerView rv;
+   private ArrayList<Item> itemArrayList = new ArrayList<>();
 
 
     @Override
