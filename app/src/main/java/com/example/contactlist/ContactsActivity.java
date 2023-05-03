@@ -1,28 +1,16 @@
 package com.example.contactlist;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.datastore.core.DataStore;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceDataStore;
 import android.widget.Button;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.prefs.Preferences;
-
-import kotlin.coroutines.Continuation;
-import kotlin.jvm.functions.Function2;
-import kotlinx.coroutines.flow.Flow;
 
 public class ContactsActivity extends AppCompatActivity {
     RecyclerView rv;
